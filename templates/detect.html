@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Detect Account</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1e293b;
+        }
+
+        .header {
+            background: linear-gradient(
+                135deg,
+                #1e293b,
+                #334155
+            );
+
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 750px;
+            margin: 40px auto;
+        }
+
+        .form-box {
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .form-box h2 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .description {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #2563eb;
+        }
+
+        .help {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 5px;
+        }
+
+        .predict-btn {
+            width: 100%;
+            padding: 14px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #2563eb;
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .predict-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #475569;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            color: #2563eb;
+        }
+
+        @media (max-width: 600px) {
+
+            .form-box {
+                padding: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+    <h1>🔍 Account Detection</h1>
+
+    <p>
+        Enter account details for AI-based analysis
+    </p>
+
+</div>
+
+
+<div class="container">
+
+    <div class="form-box">
+
+        <h2>
+            🛡️ Analyze Social Media Account
+        </h2>
+
+        <p class="description">
+            Enter the account details below and our
+            machine learning model will predict whether
+            the account is Fake or Genuine.
+        </p>
+
+
+        <form action="/predict" method="POST">
+
+
+            <!-- Followers -->
+
+            <div class="form-group">
+
+                <label>
+                    👥 Number of Followers
+                </label>
+
+                <input
+                    type="number"
+                    name="followers"
+                    placeholder="Example: 500"
+                    min="0"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Following -->
+
+            <div class="form-group">
+
+                <label>
+                    👤 Number of Following
+                </label>
+
+                <input
+                    type="number"
+                    name="following"
+                    placeholder="Example: 2000"
+                    min="0"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Posts -->
+
+            <div class="form-group">
+
+                <label>
+                    📝 Number of Posts
+                </label>
+
+                <input
+                    type="number"
+                    name="posts"
+                    placeholder="Example: 25"
+                    min="0"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Account Age -->
+<div class="form-group">
+
+    <label>
+        📅 Account Age
+    </label>
+
+    <div style="display:flex; gap:10px;">
+
+        <input
+            type="number"
+            id="accountAge"
+            name="account_age"
+            placeholder="Example: 2"
+            min="0"
+            step="0.1"
+            required
+            style="flex:1;"
+        >
+
+        <select
+            id="ageUnit"
+            style="width:130px;"
+        >
+            <option value="months">Months</option>
+            <option value="years">Years</option>
+        </select>
+
+    </div>
+
+    <div class="help">
+        Select whether the account age is entered in months or years.
+    </div>
+
+</div>
+            <!-- Profile Picture -->
+
+            <div class="form-group">
+
+                <label>
+                    🖼️ Profile Picture
+                </label>
+
+                <select name="profile_pic" required>
+
+                    <option value="">
+                        Select an option
+                    </option>
+
+                    <option value="1">
+                        Yes - Profile picture available
+                    </option>
+
+                    <option value="0">
+                        No - Profile picture missing
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Bio -->
+
+            <div class="form-group">
+
+                <label>
+                    📄 Profile Bio
+                </label>
+
+                <select name="bio" required>
+
+                    <option value="">
+                        Select an option
+                    </option>
+
+                    <option value="1">
+                        Yes - Bio available
+                    </option>
+
+                    <option value="0">
+                        No - Bio missing
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="predict-btn"
+            >
+                🤖 Analyze Account
+            </button>
+
+
+        </form>
+
+
+        <a href="/" class="back-btn">
+            ← Back to Home
+        </a>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    document.querySelector("form").addEventListener("submit", function () {
+
+        const ageInput = document.getElementById("accountAge");
+        const ageUnit = document.getElementById("ageUnit");
+
+        let age = parseFloat(ageInput.value);
+
+        if (ageUnit.value === "years") {
+
+            age = age * 12;
+
+        }
+
+        ageInput.value = Math.round(age);
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

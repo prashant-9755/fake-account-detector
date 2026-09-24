@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detection History</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eef2ff, #f8fafc);
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header-icon {
+            font-size: 45px;
+        }
+
+        h1 {
+            color: #1e293b;
+            margin-top: 10px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            background: #4f46e5;
+            color: white;
+            padding: 14px;
+            text-align: center;
+        }
+
+        td {
+            padding: 13px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .fake {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .genuine {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        .confidence {
+            font-weight: bold;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 22px;
+            background: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: #4338ca;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="header-icon">📊</div>
+
+        <h1>Detection History</h1>
+
+        <p class="subtitle">
+            Previous fake account detection records
+        </p>
+
+    </div>
+
+    {% if records %}
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Followers</th>
+                    <th>Following</th>
+                    <th>Posts</th>
+                    <th>Account Age</th>
+                    <th>Prediction</th>
+                    <th>Confidence</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for record in records %}
+
+                <tr>
+
+                    <td>{{ record[0] }}</td>
+
+                    <td>{{ record[1] }}</td>
+
+                    <td>{{ record[2] }}</td>
+
+                    <td>{{ record[3] }}</td>
+
+                    <td>{{ record[4] }} months</td>
+
+                    <td>
+                        {% if "Fake" in record[7] %}
+                            <span class="fake">
+                                ⚠️ {{ record[7] }}
+                            </span>
+                        {% else %}
+                            <span class="genuine">
+                                ✓ {{ record[7] }}
+                            </span>
+                        {% endif %}
+                    </td>
+
+                    <td class="confidence">
+                        {{ record[8] }}%
+                    </td>
+
+                    <td>
+                        {{ record[9] }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="empty">
+        <h2>No detection records found</h2>
+        <p>Analyze an account first to see the history here.</p>
+    </div>
+
+    {% endif %}
+
+    <div style="text-align:center;">
+        <a href="/" class="button">
+            🔍 Analyze New Account
+        </a>
+    </div>
+
+</div>
+
+</body>
+
+</html>

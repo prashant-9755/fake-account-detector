@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Fake Account Detection</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1e293b;
+        }
+
+
+        /* Header */
+
+        .header {
+
+            background: linear-gradient(
+                135deg,
+                #1e293b,
+                #334155
+            );
+
+            color: white;
+
+            padding: 25px;
+
+            text-align: center;
+
+        }
+
+
+        .header h1 {
+
+            margin: 0;
+
+            font-size: 32px;
+
+        }
+
+
+        .header p {
+
+            color: #cbd5e1;
+
+            margin-top: 10px;
+
+        }
+
+
+        /* Hero */
+
+        .hero {
+
+            width: 90%;
+
+            max-width: 1100px;
+
+            margin: 40px auto;
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 50px 30px;
+
+            text-align: center;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.08);
+
+        }
+
+
+        .hero-icon {
+
+            font-size: 70px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .hero h2 {
+
+            font-size: 32px;
+
+            margin: 10px 0;
+
+        }
+
+
+        .hero p {
+
+            max-width: 700px;
+
+            margin: 15px auto;
+
+            color: #64748b;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* Buttons */
+
+        .buttons {
+
+            margin-top: 30px;
+
+        }
+
+
+        .btn {
+
+            display: inline-block;
+
+            padding: 13px 24px;
+
+            margin: 7px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            color: white;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+
+        }
+
+
+        .btn:hover {
+
+            transform: translateY(-2px);
+
+            opacity: 0.9;
+
+        }
+
+
+        .detect {
+
+            background: #2563eb;
+
+        }
+
+
+        .history {
+
+            background: #7c3aed;
+
+        }
+
+
+        .admin {
+
+            background: #334155;
+
+        }
+
+
+        /* Features */
+
+        .features {
+
+            width: 90%;
+
+            max-width: 1100px;
+
+            margin: 30px auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+
+        }
+
+
+        .feature {
+
+            background: white;
+
+            padding: 30px;
+
+            text-align: center;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 15px rgba(0,0,0,0.07);
+
+            transition: 0.3s;
+
+        }
+
+
+        .feature:hover {
+
+            transform: translateY(-5px);
+
+        }
+
+
+        .feature-icon {
+
+            font-size: 40px;
+
+        }
+
+
+        .feature h3 {
+
+            margin: 15px 0 10px;
+
+        }
+
+
+        .feature p {
+
+            color: #64748b;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* How it works */
+
+        .how-section {
+
+            width: 90%;
+
+            max-width: 1100px;
+
+            margin: 40px auto;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 15px rgba(0,0,0,0.07);
+
+        }
+
+
+        .how-section h2 {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .steps {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+
+        }
+
+
+        .step {
+
+            text-align: center;
+
+            padding: 20px;
+
+        }
+
+
+        .step-number {
+
+            width: 45px;
+
+            height: 45px;
+
+            line-height: 45px;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-weight: bold;
+
+            font-size: 18px;
+
+        }
+
+
+        .step h3 {
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .step p {
+
+            color: #64748b;
+
+        }
+
+
+        /* Footer */
+
+        footer {
+
+            margin-top: 40px;
+
+            background: #1e293b;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 20px;
+
+        }
+
+
+        footer p {
+
+            margin: 5px;
+
+            color: #cbd5e1;
+
+        }
+
+
+        /* Responsive */
+
+        @media (max-width: 800px) {
+
+            .features,
+            .steps {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .hero h2 {
+
+                font-size: 25px;
+
+            }
+
+
+            .header h1 {
+
+                font-size: 25px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- Header -->
+
+<div class="header">
+
+    <h1>🛡️ Fake Account Detection</h1>
+
+    <p>
+        AI-Based Social Media Account Analysis System
+    </p>
+
+</div>
+
+
+<!-- Hero Section -->
+
+<div class="hero">
+
+    <div class="hero-icon">
+        🛡️
+    </div>
+
+
+    <h2>
+        Detect Fake Social Media Accounts
+    </h2>
+
+
+    <p>
+
+        Our machine learning based system analyzes
+        account information such as followers,
+        following, posts, account age, profile picture
+        and bio to identify suspicious social media
+        accounts.
+
+    </p>
+
+
+    <div class="buttons">
+
+    <a href="/detect" class="btn detect">
+    🔍 Detect Account
+     </a>
+
+
+        <a href="/history" class="btn history">
+            📊 View History
+        </a>
+
+
+        <a href="/login" class="btn admin">
+            🔐 Admin Login
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- Features -->
+
+<div class="features">
+
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            🤖
+        </div>
+
+        <h3>
+            Machine Learning
+        </h3>
+
+        <p>
+            Uses a trained machine learning model
+            to analyze account characteristics.
+        </p>
+
+    </div>
+
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            ⚡
+        </div>
+
+        <h3>
+            Fast Detection
+        </h3>
+
+        <p>
+            Get account prediction and confidence
+            results quickly.
+        </p>
+
+    </div>
+
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            🔐
+        </div>
+
+        <h3>
+            Secure Management
+        </h3>
+
+        <p>
+            Admin dashboard provides secure access
+            to detection records.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- How It Works -->
+
+<div class="how-section">
+
+    <h2>
+        ⚙️ How It Works
+    </h2>
+
+
+    <div class="steps">
+
+
+        <div class="step">
+
+            <div class="step-number">
+                1
+            </div>
+
+            <h3>
+                Enter Details
+            </h3>
+
+            <p>
+                Enter the social media account
+                information.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                2
+            </div>
+
+            <h3>
+                AI Analysis
+            </h3>
+
+            <p>
+                The machine learning model analyzes
+                the provided data.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                3
+            </div>
+
+            <h3>
+                Get Result
+            </h3>
+
+            <p>
+                The system displays Fake or Genuine
+                prediction with confidence.
+            </p>
+           
+        <p> Created by Prashant Kushwah </p>
+        
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- Footer -->
+
+<footer>
+
+    <p>
+        🛡️ Fake Account Detection System
+    </p>
+
+    <p>
+        Final Year Project
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Detection Result</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1e293b;
+        }
+
+        .header {
+            background: linear-gradient(
+                135deg,
+                #1e293b,
+                #334155
+            );
+
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1000px;
+            margin: 35px auto;
+        }
+
+        .result-card {
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            text-align: center;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .result-icon {
+            font-size: 65px;
+        }
+
+        .result-title {
+            font-size: 30px;
+            margin: 15px 0;
+        }
+
+        .fake-result {
+            color: #dc2626;
+        }
+
+        .genuine-result {
+            color: #16a34a;
+        }
+
+        .confidence {
+            margin: 25px auto;
+            max-width: 600px;
+        }
+
+        .confidence-text {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 22px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #2563eb;
+            border-radius: 20px;
+            transition: width 1s ease;
+        }
+
+        .details {
+            margin-top: 30px;
+        }
+
+        .details h2 {
+            margin-bottom: 20px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .detail {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 10px;
+        }
+
+        .detail-icon {
+            font-size: 25px;
+        }
+
+        .detail h4 {
+            margin: 8px 0;
+            color: #64748b;
+        }
+
+        .detail p {
+            margin: 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .indicators {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .indicators h2 {
+            text-align: center;
+        }
+
+        .indicator {
+            padding: 12px 15px;
+            margin: 8px 0;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .buttons {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            margin: 5px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .new-btn {
+            background: #2563eb;
+        }
+
+        .history-btn {
+            background: #7c3aed;
+        }
+
+        .dashboard-btn {
+            background: #334155;
+        }
+
+        .home-btn {
+            background: #16a34a;
+        }
+
+        @media (max-width: 700px) {
+
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .result-title {
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<div class="header">
+
+    <h1>🛡️ Fake Account Detection</h1>
+
+    <p>AI-Based Account Analysis Result</p>
+
+</div>
+
+
+<div class="container">
+
+
+    <div class="result-card">
+
+
+        {% if result == "Fake / Suspicious Account" %}
+
+            <div class="result-icon">
+                ⚠️
+            </div>
+
+            <h1 class="result-title fake-result">
+                Fake / Suspicious Account
+            </h1>
+
+        {% else %}
+
+            <div class="result-icon">
+                ✅
+            </div>
+
+            <h1 class="result-title genuine-result">
+                Genuine Account
+            </h1>
+
+        {% endif %}
+
+
+        <!-- Confidence -->
+
+        <div class="confidence">
+
+            <div class="confidence-text">
+
+                <span>
+                    Detection Confidence
+                </span>
+
+                <span>
+                    {{ confidence }}%
+                </span>
+
+            </div>
+
+
+            <div class="progress-container">
+
+                <div
+                    class="progress-bar"
+                    id="progressBar">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Account Details -->
+
+        <div class="details">
+
+            <h2>
+                📊 Account Details
+            </h2>
+
+
+            <div class="detail-grid">
+
+
+                <div class="detail">
+
+                    <div class="detail-icon">
+                        👥
+                    </div>
+
+                    <h4>
+                        Followers
+                    </h4>
+
+                    <p>
+                        {{ followers }}
+                    </p>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-icon">
+                        👤
+                    </div>
+
+                    <h4>
+                        Following
+                    </h4>
+
+                    <p>
+                        {{ following }}
+                    </p>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-icon">
+                        📝
+                    </div>
+
+                    <h4>
+                        Posts
+                    </h4>
+
+                    <p>
+                        {{ posts }}
+                    </p>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-icon">
+                        📅
+                    </div>
+
+                    <h4>
+                        Account Age
+                    </h4>
+
+                    <p>
+                        {{ account_age }} months
+                    </p>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-icon">
+                        🖼️
+                    </div>
+
+                    <h4>
+                        Profile Picture
+                    </h4>
+
+                    <p>
+
+                        {% if profile_pic == 1 %}
+                            Available
+                        {% else %}
+                            Missing
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-icon">
+                        📄
+                    </div>
+
+                    <h4>
+                        Bio
+                    </h4>
+
+                    <p>
+
+                        {% if bio == 1 %}
+                            Available
+                        {% else %}
+                            Missing
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- Risk Indicators -->
+
+        <div class="indicators">
+
+            <h2>
+                🔎 Analysis Indicators
+            </h2>
+
+
+            {% for indicator in indicators %}
+
+                <div class="indicator">
+                    {{ indicator }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- Buttons -->
+
+        <div class="buttons">
+
+            <a href="/detect"
+               class="btn new-btn">
+
+                🔍 Analyze New Account
+
+            </a>
+
+
+            <a href="/history"
+               class="btn history-btn">
+
+                📋 Detection History
+
+            </a>
+
+
+            <a href="/dashboard"
+               class="btn dashboard-btn">
+
+                📊 Dashboard
+
+            </a>
+
+
+            <a href="/"
+               class="btn home-btn">
+
+                🏠 Home
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const confidence =
+        Number("{{ confidence }}");
+
+    document.getElementById(
+        "progressBar"
+    ).style.width = confidence + "%";
+
+</script>
+
+
+</body>
+
+</html>
